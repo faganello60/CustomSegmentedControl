@@ -8,7 +8,7 @@
 
 import UIKit
 protocol CustomSegmentedControlDelegate:class {
-    func changeToIndex(index:Int)
+    func change(to index:Int)
 }
 
 class CustomSegmentedControl: UIView {
@@ -43,7 +43,7 @@ class CustomSegmentedControl: UIView {
     func setIndex(index:Int) {
         buttons.forEach({ $0.setTitleColor(textColor, for: .normal) })
         let button = buttons[index]
-        seletedIndex = index
+        selectedIndex = index
         button.setTitleColor(selectorTextColor, for: .normal)
         let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(index)
         UIView.animate(withDuration: 0.2) {
@@ -56,8 +56,8 @@ class CustomSegmentedControl: UIView {
             btn.setTitleColor(textColor, for: .normal)
             if btn == sender {
                 let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
-                seletedIndex = buttonIndex
-                delegate?.changeToIndex(index: _seletedIndex)
+                selectedIndex = buttonIndex
+                delegate?.change(to: selectedIndex)
                 UIView.animate(withDuration: 0.3) {
                     self.selectorView.frame.origin.x = selectorPosition
                 }
